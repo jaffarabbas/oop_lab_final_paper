@@ -24,7 +24,7 @@ class Rescipts extends LineItems{
     private String DateofOrder;
     private String DateofDelivery;
     private String CustumerName;
-
+    int check_for_product;
     Scanner scanner_for_instance_varibale_of_Recipts = new Scanner(System.in);
 
 
@@ -96,7 +96,7 @@ class Rescipts extends LineItems{
           }
 
           if(flag){
-              System.out.println("Dispatched");
+              System.out.println("*******Dispatched*******");
           }
           else{
               System.out.println("Not dispatched");
@@ -112,42 +112,145 @@ class Rescipts extends LineItems{
 
 
      public String toString(){
+         System.out.println("********Resipt********");
+        return "Unique Id: "+getUniqueId()+"\nDate Of Order : "+getDateofOrder()+"\nDate of Delivery : "+getDateofDelivery()+"\nCustomer Name : "+getCustumerName();
+//         "\n\n*****Line Items*****\n\nProduct of Line items : \nId :"+id_making()+"\nName : "+getname()+"\nPrice : "+getPrice();
+    }
+
+    public void Select_method(){
+
         setUniqueId(UniqueIdGenerater());
         setDateofOrder(Date_inserter());
         setDateofDelivery(Date_of_deleviery_inserter());
         setCustumerName(Customer_name_insert());
         //products
-         setname(Name_insertion());
-         setPrice(price_Insertion());
-        return "Unique Id: "+getUniqueId()+"\nDate Of Order : "+getDateofOrder()+"\nDate of Delivery : "+getDateofDelivery()+"\nCustomer Name : "+getCustumerName()+"\n\n*****Line Items*****\n\nProduct of Line items : \nId :"+id_making()+"\nName : "+getname()+"\nPrice : "+getPrice();
+        System.out.println("Total Product :");
+        check_for_product = scanner_for_instance_varibale_of_Products.nextInt();
+        setname(Name_insertion());
+        setPrice(price_Insertion());
+
+        System.out.println("Line Items Selection :\nL)Show receipt\nD)Display Line Items Selecter\nS)Product Show");
+
+        char selecter = scanner_for_instance_varibale_of_Recipts.next().charAt(0);
+
+        switch (selecter){
+            case 'L':
+                System.out.println(toString());
+                Dispatch();
+                break;
+            case 'D':
+                Display1();
+                break;
+            case 'S':
+                Display2();
+                break;
+            default:
+                Select_method();
+                break;
+        }
+
     }
 
     public Rescipts(){
-        System.out.println(toString());
+        Select_method();
     }
 }
 //class 2
-//class Invoice{
-//    private int UniqueId;
-//    private String Date;
-//    private String CustomerName;
-//
-//}
+class Invoice extends LineItems{
+    private int UniqueId;
+    private String Date;
+    private String CustomerName;
+    int check_for_product;
+    Scanner scanner_for_instance_varibale_of_Invoice = new Scanner(System.in);
+
+    public void setUniqueId(int uniqueId) {
+        UniqueId = uniqueId;
+    }
+
+    public int getUniqueId() {
+        return UniqueId;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+    public String getDate() {
+        return Date;
+    }
+
+    public void setCustomerName(String customerName){
+        this.CustomerName = customerName;
+    }
+    public String getCustomerName(){
+        return CustomerName;
+    }
+
+    public String Date_insertion(){
+        System.out.println("Date of delivery : ");
+        String date = scanner_for_instance_varibale_of_Recipts.next();
+        return date;
+    }
+
+    public String Nmae_insertion(){
+        System.out.println("Date of delivery : ");
+        String name = scanner_for_instance_varibale_of_Recipts.next();
+        return name;
+    }
+
+    public void Select_method(){
+
+        //products
+        System.out.println("Total Product :");
+        check_for_product = scanner_for_instance_varibale_of_Products.nextInt();
+        setname(Name_insertion());
+        setPrice(price_Insertion());
+
+        System.out.println("Line Items Selection :\nL)Show receipt\nD)Display Line Items Selecter\nS)Product Show");
+
+        char selecter = scanner_for_instance_varibale_of_Recipts.next().charAt(0);
+
+        switch (selecter){
+            case 'L':
+                System.out.println(toString());
+                break;
+            case 'D':
+                Display1();
+                break;
+            case 'S':
+                Display2();
+                break;
+            default:
+                Select_method();
+                break;
+        }
+
+    }
+
+    public Invoice(){
+        Select_method();
+    }
+}
+}
 //class 3
 class LineItems extends Productes{
+    Rescipts new_object_fro_product_check =new Rescipts();
     Scanner scanner_for_instance_varibale_of_LineItems = new Scanner(System.in);
-    ArrayList<Productes> collection_of_Product_inctance = new ArrayList<Productes>(1);
+    ArrayList<Productes> collection_of_Product_inctance = new ArrayList<Productes>(new_object_fro_product_check.check_for_product);
     public int quantity;
     public double total;
 
     public void product_of_Lineitems(){
 
-            collection_of_Product_inctance.add(new Productes());
-            System.out.println(collection_of_Product_inctance);
+               collection_of_Product_inctance.add(new Productes());
+                System.out.println(collection_of_Product_inctance);
+
+
 
     }
 
+    int temp;
     public int setQuantity(){
+        System.out.println("Enter Quantity : ");
         quantity = scanner_for_instance_varibale_of_LineItems.nextInt();
         return quantity;
     }
@@ -160,11 +263,11 @@ class LineItems extends Productes{
 
         if(selecter == '+'){
             System.out.println("add new quantity");
-            update = old+setQuantity();
+            update = old+quantity;
         }
         else if(selecter == '-'){
             System.out.println("subtract new quantity");
-            update = old-setQuantity();
+            update = old-quantity;
         }
         else{
             UpdateQuantity();
@@ -172,16 +275,17 @@ class LineItems extends Productes{
     }
 
     public void change_product(){
-        Productes new_object = new Productes();
+        Display2();
     }
 
     public void caluculate_total(){
-        System.out.print("Quantity : "+setQuantity()+"\n"+price_Insertion());
-        total = quantity * getPrice();
+        setQuantity();
+        System.out.println("total : ");
+        total = (quantity*getPrice());
         System.out.println("Total Price : "+total);
     }
 
-    public void Display(){
+    public void Display1(){
         System.out.println("1)Show product : \n2)Calulate Total\n3)change Product\n4)Update Quantity");
         int selecter = scanner_for_instance_varibale_of_LineItems.nextInt();
         switch (selecter){
@@ -198,7 +302,7 @@ class LineItems extends Productes{
                 UpdateQuantity();
                 break;
             default:
-                Display();
+                Display1();
                 break;
         }
     }
@@ -206,6 +310,9 @@ class LineItems extends Productes{
 }
 //class 4
 class Productes{
+    Productes(){
+        Display2();
+    }
     Scanner scanner_for_instance_varibale_of_Products = new Scanner(System.in);
     private String id;
     private String name;
@@ -234,7 +341,7 @@ class Productes{
 
     //important
     public String id_making(){
-         setId(getname());
+         setId(name);
          String first_2_letter = getId();
          String last_2_letter = getId();
 
@@ -269,13 +376,17 @@ class Productes{
     }
 
 
-    public void Display(){
+    public void Display2(){
         System.out.println("Id : "+id_making());
-        System.out.print("Name : ");setname(Name_insertion());
-        System.out.print("\nPrice :");setPrice(price_Insertion());
+        setname(Name_insertion());
+        setPrice(price_Insertion());
+
+        System.out.println("Name : "+getname()+"\nPrice : "+getPrice());
+
     }
 
     //constructer to make default
+
 
 }
 //class 5
@@ -288,11 +399,11 @@ public class Question_1 {
 
     public static void main(String[] args) {
     Rescipts obj = new Rescipts();
-    LineItems obj2 = new LineItems();
-    Productes obj3 = new Productes();
+//    LineItems obj2 = new LineItems();
+//    Productes obj3 = new Productes();
 
 
-    obj2.Display();
-    obj3.Display();
+
+
     }
 }
