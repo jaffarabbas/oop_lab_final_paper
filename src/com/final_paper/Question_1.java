@@ -18,7 +18,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 //class 1
-class Rescipts{
+class Rescipts extends LineItems{
 
     private int UniqueId;
     private String DateofOrder;
@@ -102,11 +102,14 @@ class Rescipts{
 
     public void LineItems(){
         LineItems object_for_line_itms = new LineItems();
-
     }
-    public void CalculateGrandTotal(){}
+    public void CalculateGrandTotal(){
+        caluculate_total();
+    }
 
-    public void Display(){}
+    public void Display(){
+        System.out.println("Unique id :");
+    }
 }
 //class 2
 class Invoice{}
