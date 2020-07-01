@@ -70,16 +70,19 @@ class Rescipts extends LineItems{
     }
     //Date_of_order method
     public String Date_inserter(){
+        System.out.println("Date of today : : ");
           String date = scanner_for_instance_varibale_of_Recipts.next();
           return date;
     }
     //Date_of_delivery method
     public String Date_of_deleviery_inserter(){
+        System.out.println("Date of delivery : ");
         String date = scanner_for_instance_varibale_of_Recipts.next();
         return date;
     }
     //Customer Name method
     public String Customer_name_insert(){
+        System.out.println("Customer Name : ");
         String name = scanner_for_instance_varibale_of_Recipts.next();
         return name;
     }
@@ -107,12 +110,29 @@ class Rescipts extends LineItems{
         caluculate_total();
     }
 
-    public void Display(){
-        System.out.println("Unique id :");
+
+     public String toString(){
+        setUniqueId(UniqueIdGenerater());
+        setDateofOrder(Date_inserter());
+        setDateofDelivery(Date_of_deleviery_inserter());
+        setCustumerName(Customer_name_insert());
+        //products
+         setname(Name_insertion());
+         setPrice(price_Insertion());
+        return "Unique Id: "+getUniqueId()+"\nDate Of Order : "+getDateofOrder()+"\nDate of Delivery : "+getDateofDelivery()+"\nCustomer Name : "+getCustumerName()+"\n\n*****Line Items*****\n\nProduct of Line items : \nId :"+id_making()+"\nName : "+getname()+"\nPrice : "+getPrice();
+    }
+
+    public Rescipts(){
+        System.out.println(toString());
     }
 }
 //class 2
-class Invoice{}
+//class Invoice{
+//    private int UniqueId;
+//    private String Date;
+//    private String CustomerName;
+//
+//}
 //class 3
 class LineItems extends Productes{
     Scanner scanner_for_instance_varibale_of_LineItems = new Scanner(System.in);
@@ -121,10 +141,10 @@ class LineItems extends Productes{
     public double total;
 
     public void product_of_Lineitems(){
-        for (Productes product : collection_of_Product_inctance){
+
             collection_of_Product_inctance.add(new Productes());
             System.out.println(collection_of_Product_inctance);
-        }
+
     }
 
     public int setQuantity(){
@@ -162,7 +182,7 @@ class LineItems extends Productes{
     }
 
     public void Display(){
-        System.out.println("1)Show product : 2)Calulate Total\n3)change Product\n4)Update Quantity");
+        System.out.println("1)Show product : \n2)Calulate Total\n3)change Product\n4)Update Quantity");
         int selecter = scanner_for_instance_varibale_of_LineItems.nextInt();
         switch (selecter){
             case 1:
@@ -181,10 +201,6 @@ class LineItems extends Productes{
                 Display();
                 break;
         }
-    }
-
-    public LineItems(){
-        Display();
     }
 
 }
@@ -218,7 +234,7 @@ class Productes{
 
     //important
     public String id_making(){
-         setId(Genrate_id());
+         setId(getname());
          String first_2_letter = getId();
          String last_2_letter = getId();
 
@@ -227,29 +243,29 @@ class Productes{
     }
 
     //create new id always
-    public String Genrate_id(){
-        int count = 7;
-        final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder builder = new StringBuilder();
-        while (count-- != 0) {
-            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-        }
-        return builder.toString();
-    }
+//    public String Genrate_id(){
+//        int count = 7;
+//        final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//        StringBuilder builder = new StringBuilder();
+//        while (count-- != 0) {
+//            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+//            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+//        }
+//        return builder.toString();
+//    }
 
     public String Name_insertion(){
         System.out.println("Product Name : ");
-        String name = scanner_for_instance_varibale_of_Products.nextLine();
+        String name = scanner_for_instance_varibale_of_Products.next();
         return name;
     }
     public double price_Insertion(){
         System.out.println("Product Price : ");
         double price = scanner_for_instance_varibale_of_Products.nextDouble();
-        if (price <= 0){
+        if(price <= 0){
             price_Insertion();
         }
-        return price_Insertion();
+        return price;
     }
 
 
@@ -261,9 +277,6 @@ class Productes{
 
     //constructer to make default
 
-    public Productes(){
-        Display();
-    }
 }
 //class 5
 class processDocumnets{}
@@ -274,6 +287,12 @@ class processDocumnets{}
 public class Question_1 {
 
     public static void main(String[] args) {
+    Rescipts obj = new Rescipts();
+    LineItems obj2 = new LineItems();
+    Productes obj3 = new Productes();
 
+
+    obj2.Display();
+    obj3.Display();
     }
 }
