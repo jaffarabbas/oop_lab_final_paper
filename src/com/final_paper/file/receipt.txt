@@ -1,0 +1,26 @@
+Uniqueid   date of order  date of delevery Customer name  weight of parsell
+
+
+
+1000004207    fdfsdf          sdfsdf             345345
+Products : 
+Name : 345345
+Price : 345345.0
+999991213    fdgdfg          dfgdf             g435
+Products : 
+Name : 45345345
+Price : 345345.0
+999998355    45345          345345             345435         345345.0
+Products : 
+Name : 345345
+Price : 345345.0
+
+1000000268    5345345          345345             345345         345.0
+Products : 
+Name : 534534
+Price : 345345.0
+
+1000001155    56756          789789             jghjg         87.0
+Products : 
+Name : 78979
+Price : 980.0

@@ -1,0 +1,6 @@
+
+Current date                   Unique id     name  product    order date   Deleivery
+
+Thu Jul 02 01:49:48 PKT 2020    89o          jaffar poo 23.0  89.0100 02/07/202005/07/2020
+
+Thu Jul 02 01:56:13 PKT 2020    94f          sdfdsf sdfdsf 234.0  234.0324 02/07/202005/07/2020
