@@ -157,18 +157,18 @@ class Rescipts extends LineItems{
 }
 //class 2
 class Invoice extends LineItems{
-    private int UniqueId;
+    private int UniqueId_invoice;
     private String Date;
-    private String CustomerName;
+    private String CustomerName_invoice;
     int check_for_product;
     Scanner scanner_for_instance_varibale_of_Invoice = new Scanner(System.in);
 
     public void setUniqueId(int uniqueId) {
-        UniqueId = uniqueId;
+        UniqueId_invoice = uniqueId;
     }
 
     public int getUniqueId() {
-        return UniqueId;
+        return UniqueId_invoice;
     }
 
     public void setDate(String date) {
@@ -179,26 +179,42 @@ class Invoice extends LineItems{
     }
 
     public void setCustomerName(String customerName){
-        this.CustomerName = customerName;
+        this.CustomerName_invoice = customerName;
     }
     public String getCustomerName(){
-        return CustomerName;
+        return CustomerName_invoice;
     }
 
     public String Date_insertion(){
-        System.out.println("Date of delivery : ");
-        String date = scanner_for_instance_varibale_of_Recipts.next();
+        System.out.println("Date for invoice : ");
+        String date = scanner_for_instance_varibale_of_Invoice.next();
         return date;
     }
 
     public String Nmae_insertion(){
-        System.out.println("Date of delivery : ");
-        String name = scanner_for_instance_varibale_of_Recipts.next();
+        System.out.println("Name for Invoice : ");
+        String name = scanner_for_instance_varibale_of_Invoice.next();
         return name;
     }
 
+    public int UniqueIdGenerater(){
+        Random rand_for_generater = new Random();
+        int generater_key = (rand_for_generater.nextInt()%10000)+1000000000;
+        return  generater_key;
+    }
+
+    public String toString(){
+        System.out.println("********Invoice********");
+        return "Unique Id: "+getUniqueId()+"\nDate for Invoice : "+getDate()+"\nCustomer Name : "+getCustomerName();
+//         "\n\n*****Line Items*****\n\nProduct of Line items : \nId :"+id_making()+"\nName : "+getname()+"\nPrice : "+getPrice();
+    }
+
+
     public void Select_method(){
 
+        setUniqueId(UniqueIdGenerater());
+        setDate(Date_insertion());
+        setCustomerName(Nmae_insertion());
         //products
         System.out.println("Total Product :");
         check_for_product = scanner_for_instance_varibale_of_Products.nextInt();
@@ -207,7 +223,7 @@ class Invoice extends LineItems{
 
         System.out.println("Line Items Selection :\nL)Show receipt\nD)Display Line Items Selecter\nS)Product Show");
 
-        char selecter = scanner_for_instance_varibale_of_Recipts.next().charAt(0);
+        char selecter = scanner_for_instance_varibale_of_Invoice.next().charAt(0);
 
         switch (selecter){
             case 'L':
@@ -230,7 +246,7 @@ class Invoice extends LineItems{
         Select_method();
     }
 }
-}
+
 //class 3
 class LineItems extends Productes{
     Rescipts new_object_fro_product_check =new Rescipts();
@@ -390,7 +406,32 @@ class Productes{
 
 }
 //class 5
-class processDocumnets{}
+class processDocumnets{
+    Scanner scanner_for_instance_varibale_of_processDocuments = new Scanner(System.in);
+    void select_class(){
+        System.out.println("Slect your mode : \n1)Rescipt\n2)Invoice");
+        int selecter = scanner_for_instance_varibale_of_processDocuments.nextInt();
+        switch (selecter){
+            case 1:
+                Rescipts obj = new Rescipts();
+                break;
+            case 2:
+                Invoice obj2 = new Invoice();
+                break;
+            default:
+                select_class();
+                break;
+        }
+    }
+
+    public File_insertion(){
+
+    }
+
+    public processDocumnets(){
+        select_class();
+    }
+}
 
 
 
